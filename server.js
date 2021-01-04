@@ -23,6 +23,10 @@ app.get("/timestamp", function (req, res) {
   res.sendFile(__dirname + '/views/timestamp.html');
 });
 
+app.get("/requestHeaderParser", function (req, res) {
+  res.sendFile(__dirname + '/views/requestHeaderParser.html');
+});
+
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   console.log({greeting:'hello API'}) // outputs in git
@@ -72,6 +76,15 @@ app.get('/api/timestamp/:date', (request,response)=>{
 app.get('/api/timestamp', (request,response)=>{
   responseObject['unix'] = new Date().getTime()
   responseObject['utc'] = new Date().toUTCString()
+
+  response.json(responseObject)
+})
+
+app.enable('trust proxy')
+app.get('/api/whoami', (request, response)=>{
+  responseObject['ipaddress'] = request.ip
+  responseObject['language'] = request.get('Accept-Language')
+  responseObject['software'] = request.get('User-Agent')
 
   response.json(responseObject)
 })
