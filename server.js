@@ -44,6 +44,7 @@ app.get('/api/timestamp/:date', (request,response)=>{
     responseObject['utc'] = new Date(date).toUTCString()
   }else{
     //Timestamp
+    date = parseInt(date)
     
     responseObject['unix'] = new Date(date).getTime()
     responseObject['utc'] = new Date(date).toUTCString()
