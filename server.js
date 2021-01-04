@@ -27,6 +27,10 @@ app.get("/requestHeaderParser", function (req, res) {
   res.sendFile(__dirname + '/views/requestHeaderParser.html');
 });
 
+app.get("/urlShortenerMicroService", function (req, res) {
+  res.sendFile(__dirname + '/views/urlShortenerMicroService.html');
+});
+
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   console.log({greeting:'hello API'}) // outputs in git
