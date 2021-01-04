@@ -38,18 +38,27 @@ let responseObject = {}
 app.get('/api/timestamp/:date', (request,response)=>{
   let date = request.params.date
 
-  if (date.includes('-')){
-    //Date String
-    responseObject['unix'] = new Date(date).getTime()
-    responseObject['utc'] = new Date(date).toUTCString()
-  }else{
-    //Timestamp
-    //date = parseInt(date)
-    
-    responseObject['unix'] = new Date(parseInt(date)).getTime()
-    responseObject['utc'] = new Date(parseInt(date)).toUTCString()
-
+  if (/\d{5,}/.test(date)){
+      date = parseInt(date)
+      
+      responseObject['unix'] = new Date(date).getTime()
+      responseObject['utc'] = new Date(date).toUTCString()
+  } else {
+      responseObject['unix'] = new Date(date).getTime()
+      responseObject['utc'] = new Date(date).toUTCString()
+  //
   }
+  // if (date.includes('-')){
+  //   //Date String
+  //   responseObject['unix'] = new Date(date).getTime()
+  //   responseObject['utc'] = new Date(date).toUTCString()
+  // }else{
+  //   //Timestamp
+  //   date = parseInt(date)
+    
+  //   responseObject['unix'] = new Date(date).getTime()
+  //   responseObject['utc'] = new Date(date).toUTCString()
+  // }
 
   if(!responseObject['unix'] || !responseObject['utc']){
     response.json({error: 'Invalid Date'})
